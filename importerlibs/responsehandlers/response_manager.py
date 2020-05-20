@@ -13,20 +13,21 @@ class ResponseManager:
         "msg": "Importer not yet started"
     }
 
-    def set_response(self,
+    @classmethod
+    def set_response(cls,
                      success: bool = None,
                      msg: str = None,
                      import_history_id: str = None,
                      importer_id: str = None):
         if success:
-            self.EVENT_RESPONSE['success'] = success
+            cls.EVENT_RESPONSE['success'] = success
         if msg:
-            self.EVENT_RESPONSE['msg'] = msg
+            cls.EVENT_RESPONSE['msg'] = msg
         if import_history_id:
-            self.EVENT_RESPONSE['import_history_id'] = import_history_id
+            cls.EVENT_RESPONSE['import_history_id'] = import_history_id
         if importer_id:
-            self.EVENT_RESPONSE['importer_id'] = importer_id
+            cls.EVENT_RESPONSE['importer_id'] = importer_id
 
-    @property
-    def get_response(self):
-        return self.EVENT_RESPONSE
+    @classmethod
+    def get_response(cls):
+        return cls.EVENT_RESPONSE
