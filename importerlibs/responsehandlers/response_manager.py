@@ -6,7 +6,6 @@ current_user = None
 
 
 class ResponseManager:
-
     EVENT_RESPONSE = {
         "success": False,
         "importer_id": None,
@@ -31,6 +30,3 @@ class ResponseManager:
     @property
     def get_response(self):
         return self.EVENT_RESPONSE
-
-
-

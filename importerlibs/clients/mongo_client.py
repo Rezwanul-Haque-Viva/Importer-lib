@@ -1,8 +1,8 @@
 import mongoengine
 
 
-class mongo_connection:
-    """mongo db connection context manager"""
+class MongoConnector:
+    """mongo db connector context manager"""
     def __init__(self, config):
         self._config = config
         self.connector = None
