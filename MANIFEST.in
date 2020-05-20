@@ -1,2 +1,2 @@
-include models/states/us_states.yml
-include es/mappings.json
+# Include the README
+include *.md

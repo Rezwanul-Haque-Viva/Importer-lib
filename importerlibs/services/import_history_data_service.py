@@ -7,8 +7,8 @@ from campuslibs.aws.s3 import S3Utility
 from models.history.import_history import ImportHistoryData
 from mongoengine import NotUniqueError
 
-from utils import file_utils, s3_utils
-from utils.constants import Constants
+from importerlibs.utils import file_utils, s3_utils
+from importerlibs.utils.constants import Constants
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

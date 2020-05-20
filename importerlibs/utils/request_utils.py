@@ -4,7 +4,7 @@ import logging
 import requests
 from requests.auth import HTTPBasicAuth
 
-from utils.constants import Constants
+from importerlibs.utils.constants import Constants
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

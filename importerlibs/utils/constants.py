@@ -1,6 +1,6 @@
 import os
 
-from utils.file_utils import get_project_root
+from importerlibs.utils.file_utils import get_project_root
 
 
 class Constants:
