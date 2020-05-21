@@ -8,7 +8,7 @@ def create_import_history(importer: object) -> object:
     try:
         import_history = ImportHistory(
             importer_name=importer.name,
-            base_url=importer.onet.api_base_url,
+            base_url='',
             importer_start_time=datetime.utcnow(),
             importer_config=importer.id,
             importer_config_sanpshot=importer.to_mongo()

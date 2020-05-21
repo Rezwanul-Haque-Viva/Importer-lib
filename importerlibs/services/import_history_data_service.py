@@ -21,8 +21,6 @@ class ImporterHistoryDataServiceBaseClass(metaclass=ABCMeta):
         self.import_history = import_history
         self._config = config
 
-        self.load_importer_specific_services()
-
         if self._config.S3_ENABLED:
             self.s3 = S3Utility(self._config.AWS_ACCESS_KEY_ID,
                                 self._config.AWS_SECRET_ACCESS_KEY,
@@ -71,6 +69,31 @@ class ImporterHistoryDataServiceBaseClass(metaclass=ABCMeta):
             data_object=data_dict
         )
 
+
+class BaseDbService:
+
+    def __init__(self, import_history_service):
+        self.service = import_history_service
+
+    def save(self, data_dict):
+        obj = self.create_import_history_data(data_dict)
+        self.service.save(obj)
+        self.service.dump(obj)
+
+    def save_all(self, data_dict_list):
+        for data_dict in data_dict_list:
+            obj = self.create_import_history_data(data_dict)
+            self.service.save(obj)
+            self.service.dump(obj)
+
+    def save_bulk(self, data_dict_list):
+        list_ = []
+        for data_dict in data_dict_list:
+            obj = self.create_import_history_data(data_dict)
+            list_.append(obj)
+            self.service.dump(obj)
+        self.service.save_bulk(list_)
+
     @abstractmethod
-    def load_importer_specific_services(self):
+    def create_import_history_data(self, data_dict):
         raise NotImplementedError
