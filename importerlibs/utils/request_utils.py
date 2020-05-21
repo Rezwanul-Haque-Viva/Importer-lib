@@ -36,7 +36,8 @@ class Request:
         except Exception as e:
             logger.error("Error in requesting url: {} params: {}\n{}".format(url, params, str(e)))
 
-    def post_request(self, url, data):
+    @staticmethod
+    def post_request(url, data):
         header_accept = Constants.HEADER_ACCEPT_JSON
 
         try:
