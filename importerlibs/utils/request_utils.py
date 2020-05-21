@@ -15,12 +15,13 @@ class Request:
         self._config = config
 
     def get_request(self, url, params):
-        authentication = HTTPBasicAuth(self._config.ONET_USER_NAME, self._config.ONET_PASSWORD)
+        if self._config:
+            authentication = HTTPBasicAuth(self._config.ONET_USER_NAME, self._config.ONET_PASSWORD)
         header_accept = Constants.HEADER_ACCEPT_JSON
 
         try:
             response = requests.get(url,
-                                    auth=authentication,
+                                    auth=authentication if authentication else None,
                                     headers=header_accept,
                                     params=params,
                                     timeout=(Constants.TIMEOUT_CONNECT, Constants.TIMEOUT_READ))
@@ -34,6 +35,25 @@ class Request:
 
         except Exception as e:
             logger.error("Error in requesting url: {} params: {}\n{}".format(url, params, str(e)))
+
+    def post_request(self, url, data):
+        header_accept = Constants.HEADER_ACCEPT_JSON
+
+        try:
+            response = requests.post(url,
+                                     headers=header_accept,
+                                     data=data,
+                                     timeout=(Constants.TIMEOUT_CONNECT, Constants.TIMEOUT_READ))
+
+            if response.status_code != 200:
+                logger.error(response.text)
+                return
+
+            res_dict = json.loads(response.text)
+            return res_dict
+
+        except Exception as e:
+            logger.error(f"Error in requesting url: {url}\n{str(e)}")
 
     @staticmethod
     def pagination(first, batch_size, total):
