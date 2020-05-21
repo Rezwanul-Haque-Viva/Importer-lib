@@ -2,7 +2,6 @@ import json
 import logging
 
 import requests
-from requests.auth import HTTPBasicAuth
 
 from importerlibs.utils.constants import Constants
 
@@ -11,17 +10,12 @@ logger = logging.getLogger(__name__)
 
 
 class Request:
-    def __init__(self, config=None):
-        self._config = config
-
-    def get_request(self, url, params):
-        if self._config:
-            authentication = HTTPBasicAuth(self._config.ONET_USER_NAME, self._config.ONET_PASSWORD)
+    @staticmethod
+    def get_request(url, params):
         header_accept = Constants.HEADER_ACCEPT_JSON
 
         try:
             response = requests.get(url,
-                                    auth=authentication if authentication else None,
                                     headers=header_accept,
                                     params=params,
                                     timeout=(Constants.TIMEOUT_CONNECT, Constants.TIMEOUT_READ))
