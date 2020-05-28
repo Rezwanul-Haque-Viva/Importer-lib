@@ -17,6 +17,7 @@ setup(
     install_requires=[
         "mongoengine==0.19.1",
         "requests==2.22.0",
+        "xlrd==1.2.0",
     ],
     dependency_links=[
         'git+ssh://git@bitbucket.org/vivacomsolution/campus-shared-models.git@v1.45.0#egg=shared-models-campuscom',

@@ -15,6 +15,9 @@ logger = logging.getLogger(__name__)
 
 
 class ImporterHistoryDataServiceBaseClass(metaclass=ABCMeta):
+    """
+    Importer History Data Service Base Class
+    """
     def __init__(self, import_history, importer, config):
         self.importer = importer
 
@@ -28,6 +31,11 @@ class ImporterHistoryDataServiceBaseClass(metaclass=ABCMeta):
 
     @staticmethod
     def save(data):
+        """
+        Save data obj to DB
+        :param data: dict
+        :return: None
+        """
         try:
             data.save()
         except NotUniqueError as e:
@@ -37,6 +45,11 @@ class ImporterHistoryDataServiceBaseClass(metaclass=ABCMeta):
             logger.error(f"Error on saving {data.key_name} data: id={data.data_object_id} \n{str(e)}")
 
     def dump(self, data):
+        """
+        Create a dump of the data obj by dumping on local folder then upload the data folder to S3
+        :param data:
+        :return:
+        """
         if not self._config.DUMP_ENABLED:
             return
 
