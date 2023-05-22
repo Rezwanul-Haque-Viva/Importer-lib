@@ -16,7 +16,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "mongoengine==0.19.1",
-        "requests==2.22.0",
+        "requests==2.31.0",
         "xlrd==1.2.0",
     ],
     dependency_links=[
